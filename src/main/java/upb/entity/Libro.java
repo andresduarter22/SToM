@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "libro")
 public class Libro implements Serializable {
+
 	@Id
 	@Column(name = "libro_id", unique = true)
 	private int id;
