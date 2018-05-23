@@ -10,6 +10,9 @@
         <!-- Entity classes -->
 		<class>upb.entity.Libro</class>
 		<class>upb.entity.Distribuidor</class>
+		<class>upb.entity.Administrador</class>
+		<class>upb.entity.Cliente</class>
+
 
 		<properties>
 
