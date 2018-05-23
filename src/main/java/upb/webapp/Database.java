@@ -39,7 +39,7 @@ public class Database {
 			transaction.begin();
 			// crea objeto
 			Distribuidor dis= new Distribuidor();
-			dis.setId(id);
+			dis.setId_distribuidor(id);
 			dis.setCorreo(correo);
 			dis.setDireccion(direccion);
 			dis.setNombre(nombre);
@@ -153,7 +153,7 @@ public class Database {
        Database a = new Database();
         // Create two Students
 		//a.createDistribuidor(1,"bethesda", "Silicon Valley", "70577763", "papas@hotmail.com");
-		a.createDistribuidor(1,"bethesda", "Silicon Valley 2", "666666", "papas@hotmail.com");
+		a.createDistribuidor(5,"bethesda", "Silicon Valley 2", "666666", "papas@hotmail.com");
 
 		/*        a.create(2, "Libro2", "test1"); // Bob will get an id 2
         a.create(3, "Libro3", "test3"); // Charlie will get an id 3

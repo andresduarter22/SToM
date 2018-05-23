@@ -15,9 +15,9 @@ public class LibroWebApp {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createTrackInJSON(Distribuidor distribuidor) {
-        String result = "Libro Guardado : " + distribuidor;
+        String result = "Distribuidor Guardado : " + distribuidor;
         Database b = new Database();
-        b.createDistribuidor(distribuidor.getId(),distribuidor.getNombre(),distribuidor.getCorreo()
+        b.createDistribuidor(distribuidor.getId_distribuidor(),distribuidor.getNombre(),distribuidor.getCorreo()
                         , distribuidor.getTelefono(),distribuidor.getDireccion());
         return Response
                 .status(200)

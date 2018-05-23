@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class Distribuidor implements Serializable{
 
     @Id
-    @Column(name = "id", unique = true)
-    private int id;
+    @Column(name = "id_distribuidor", unique = true)
+    private int id_distribuidor;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -26,12 +26,12 @@ public class Distribuidor implements Serializable{
     @Column(name = "correo", nullable = false)
     private String correo;
 
-    public int getId() {
-        return id;
+    public int getId_distribuidor() {
+        return id_distribuidor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_distribuidor(int id_distribuidor) {
+        this.id_distribuidor = id_distribuidor;
     }
 
     public String getNombre() { return nombre;    }
@@ -56,7 +56,7 @@ public class Distribuidor implements Serializable{
 
     @Override
     public String toString() {
-        return id + "\t" + nombre + "\t" + telefono + "\t" + direccion +"\t"+ correo;
+        return id_distribuidor + "\t" + nombre + "\t" + telefono + "\t" + direccion +"\t"+ correo;
     }
 
 }
