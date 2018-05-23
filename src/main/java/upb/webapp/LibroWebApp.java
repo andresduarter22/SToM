@@ -1,5 +1,6 @@
 package upb.webapp;
 
+import upb.entity.Distribuidor;
 import upb.entity.Libro;
 
 import javax.ws.rs.*;
@@ -13,10 +14,11 @@ public class LibroWebApp {
     @Path("/post")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createTrackInJSON(Libro libro) {
-        String result = "Libro Guardado : " + libro;
+    public Response createTrackInJSON(Distribuidor distribuidor) {
+        String result = "Libro Guardado : " + distribuidor;
         Database b = new Database();
-        b.create(libro.getId(), libro.getName(), libro.getAutor());
+        b.createDistribuidor(distribuidor.getId(),distribuidor.getNombre(),distribuidor.getCorreo()
+                        , distribuidor.getTelefono(),distribuidor.getDireccion());
         return Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
@@ -24,7 +26,7 @@ public class LibroWebApp {
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
                 .header("Access-Control-Max-Age", "1209600")
-                .entity(libro)
+                .entity(distribuidor)
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package upb.webapp;
 
+import upb.entity.Distribuidor;
 import upb.entity.Libro;
 
 import javax.persistence.EntityManager;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Database {
 	// Create an EntityManagerFactory when you start the application.
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-			.createEntityManagerFactory("Upb");
+			.createEntityManagerFactory("Stom");
 
 
 
@@ -19,13 +20,16 @@ public class Database {
 
     public void closeDataBase(){ENTITY_MANAGER_FACTORY.close();}
 	/**
-	 * Create a new Libro.
-	 * @param name
-	 * @param autor
+	 * Create a new Distribuidor.
+	 * @param nombre
+	 * @param direccion
+	 * @param telefono
+	 * @param correo
 	 */
-	public void create(int id, String name, String autor) {
+	public void createDistribuidor(int id, String nombre, String direccion,String telefono,String correo) {
 		// Create an EntityManager
-        System.out.println("Creando Libro : " + name+ " id : "+id);
+		//TODO modificar
+        System.out.println("Creando distrib : " + nombre+ " id : "+id + direccion + telefono + correo);
 		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction transaction = null;
 
@@ -34,12 +38,14 @@ public class Database {
 			transaction = manager.getTransaction();
 			transaction.begin();
 			// crea objeto
-			Libro stu = new Libro();
-			stu.setId(id);
-			stu.setName(name);
-			stu.setAutor(autor);
+			Distribuidor dis= new Distribuidor();
+			dis.setId(id);
+			dis.setCorreo(correo);
+			dis.setDireccion(direccion);
+			dis.setNombre(nombre);
+			dis.setTelefono(telefono);
 			// guarda libro persistentemente
-			manager.persist(stu);
+			manager.persist(dis);
 			// envia transaccion
 			transaction.commit();
 		} catch (Exception ex) {
@@ -143,28 +149,30 @@ public class Database {
 	}
 
 
-//    public static void main(String[] args) {
-//        Database a = new Database();
-//        // Create two Students
-//        a.create(1, "Libro1", "test"); // Alice will get an id 1
-//        a.create(2, "Libro2", "test1"); // Bob will get an id 2
-//        a.create(3, "Libro3", "test3"); // Charlie will get an id 3
-//
-//        // Update the age of Bob using the id
-//        a.update(2, "Bob", "abc");
-//
-//        // Delete the Alice from database
-//        a.delete(1);
-//
-//        // Print all the Students
-//        List<Libro> libros = a.readAll();
-//        if (libros != null) {
-//            for (Libro stu : libros) {
-//                System.out.println(stu);
-//            }
-//        }
-//
-//        // NEVER FORGET TO CLOSE THE ENTITY_MANAGER_FACTORY
-//        ENTITY_MANAGER_FACTORY.close();
-//    }
+    public static void main(String[] args) {
+       Database a = new Database();
+        // Create two Students
+		//a.createDistribuidor(1,"bethesda", "Silicon Valley", "70577763", "papas@hotmail.com");
+		a.createDistribuidor(1,"bethesda", "Silicon Valley 2", "666666", "papas@hotmail.com");
+
+		/*        a.create(2, "Libro2", "test1"); // Bob will get an id 2
+        a.create(3, "Libro3", "test3"); // Charlie will get an id 3
+
+        // Update the age of Bob using the id
+        a.update(2, "Bob", "abc");
+
+        // Delete the Alice from database
+        a.delete(1);
+
+       // Print all the Students
+        List<Libro> libros = a.readAll();
+        if (libros != null) {
+            for (Libro stu : libros) {
+                System.out.println(stu);
+            }
+        }
+*/
+        // NEVER FORGET TO CLOSE THE ENTITY_MANAGER_FACTORY
+        ENTITY_MANAGER_FACTORY.close();
+    }
 }

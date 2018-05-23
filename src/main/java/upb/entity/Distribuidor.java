@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+
 @Entity
 @Table(name = "distribuidor")
 public class Distribuidor implements Serializable{
@@ -55,7 +56,7 @@ public class Distribuidor implements Serializable{
 
     @Override
     public String toString() {
-        return id + "\t" + nombre + "\t" + telefono;
+        return id + "\t" + nombre + "\t" + telefono + "\t" + direccion +"\t"+ correo;
     }
 
 }
