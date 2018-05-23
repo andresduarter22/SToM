@@ -29,7 +29,7 @@ public class ClienteWebApp {
                 .build();
     }
 
-/*
+
 @DELETE
 @Path("/cliente/borrar/{id_cliente}")
 public Response borrarCliente(@PathParam("id_cliente") int id_cliente){
@@ -45,5 +45,5 @@ return (Response) javax.ws.rs.core.Response
 .build();
 
 }
-*/
+
 }
