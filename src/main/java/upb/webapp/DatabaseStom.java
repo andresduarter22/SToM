@@ -82,7 +82,8 @@ public class DatabaseStom {
     public static void main(String[] args) {
         DatabaseStom a = new DatabaseStom();
         // Create two Students
-		a.create("PEdrote","@asdas","1234");
+//		a.create("PEdrote","@asdas","1234");
+		a.modificar(27,"Asdasd","asdas","asdasd");
 		//a.delete(19);
       /*  a.create(1, "Libro1", "test"); // Alice will get an id 1
         a.create(2, "Libro2", "test1"); // Bob will get an id 2
@@ -138,6 +139,33 @@ public class DatabaseStom {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public void modificar(int id, String nombre, String correo, String password) {
+		// Create an EntityManager
+
+		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+		EntityTransaction transaction = null;
+
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			Cliente stu = manager.find(Cliente.class, id);
+			stu.setNombre(nombre);
+			stu.setCorreo(correo);
+			stu.setPassword(password);
+			manager.persist(stu);
+
+			// envia transaccion
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
 		}
 	}
 }
