@@ -6,7 +6,7 @@ USE STOM;
 CREATE TABLE cliente(
     id_cliente INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(500),
-    correo VARCHAR(500) UNIQUE,
+    correo VARCHAR(500) UNIQUE NOT NULL,
     password VARCHAR(20),
     credito double(8,2),
     PRIMARY KEY(id_cliente)
@@ -96,5 +96,17 @@ Create trigger borrar_Cliente after delete on cliente
 for each row
 Begin
   insert into log_cliente values(null, old.id_cliente, old.nombre, "Cliente borrado");
+end //
+Delimiter ;
+
+
+drop trigger if exists Validar_Mail;
+Delimiter //
+Create trigger ValidarMail before insert on cliente
+for each row
+Begin
+if (new.correo not like '%@%_.__%') then
+  set new.correo=null;
+end if;
 end //
 Delimiter ;
