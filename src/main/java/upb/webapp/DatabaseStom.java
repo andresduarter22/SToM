@@ -83,7 +83,7 @@ public class DatabaseStom {
         DatabaseStom a = new DatabaseStom();
         // Create two Students
 //		a.create("PEdrote","@asdas","1234");
-		a.modificar(27,"Asdasd","asdas","asdasd");
+		a.modificar(1,"Asdasd","asdas","asdasd");
 		//a.delete(19);
       /*  a.create(1, "Libro1", "test"); // Alice will get an id 1
         a.create(2, "Libro2", "test1"); // Bob will get an id 2
