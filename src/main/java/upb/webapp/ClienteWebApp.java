@@ -62,5 +62,22 @@ public class ClienteWebApp {
                 .build();
 
     }
-
+    @GET
+    @Path("/login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public javax.ws.rs.core.Response login(Cliente cliente){
+        DatabaseStom db = new DatabaseStom();
+        Cliente res = db.auth(cliente.getCorreo(), cliente.getPassword());
+        db.closeDataBase();
+        return javax.ws.rs.core.Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .header("Access-Control-Max-Age", "1209600")
+                .entity(res)
+                .build();
+    }
 }

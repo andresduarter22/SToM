@@ -106,7 +106,7 @@ public class DatabaseStom {
         // NEVER FORGET TO CLOSE THE ENTITY_MANAGER_FACTORY
         ENTITY_MANAGER_FACTORY.close();
     }
-	public static boolean auth(String email, String password) {
+	public static Cliente auth(String email, String password) {
 		List<Cliente> list = null;
 		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction transaction = null;
@@ -133,12 +133,12 @@ public class DatabaseStom {
 		try{
 			cliente = list.get(0);
 		}catch (Exception e){
-			return false;
+			return null;
 		}
 		if (cliente.getPassword().equals(password)) {
-			return true;
+			return cliente;
 		} else {
-			return false;
+			return null;
 		}
 	}
 
