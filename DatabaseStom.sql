@@ -6,7 +6,7 @@ USE STOM;
 CREATE TABLE cliente(
     id_cliente INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(500),
-    correo VARCHAR(500),
+    correo VARCHAR(500) UNIQUE,
     password VARCHAR(20),
     credito double(8,2),
     PRIMARY KEY(id_cliente)
