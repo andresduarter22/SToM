@@ -25,6 +25,8 @@ public class Cliente implements Serializable {
     @Column(name = "credito")
     private double credito;
 
+    public  Cliente(){}
+
     public Cliente(int id_cliente, String nombre, String correo, String password, double credito) {
         this.id_cliente = id_cliente;
         this.nombre = nombre;

@@ -51,11 +51,38 @@ public class DatabaseStom {
 		}
 	}
 
+	/**
+	 *Eliminar Libro
+	 * @param id
+	 */
+	public void delete(int id) {
+		// Create an EntityManager
+		System.out.println("eliminar Cliente: "+id);
+		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+		EntityTransaction transaction = null;
+
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			Cliente clienteborr = manager.find(Cliente.class, id);
+			manager.remove(clienteborr);
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+	}
+
 
     public static void main(String[] args) {
         DatabaseStom a = new DatabaseStom();
         // Create two Students
-		a.create(2,"Dini","dini.com2 ","patito",20.09);
+	//	a.create(19,"Dini","dini.com2 ","patito",20.09);
+		a.delete(19);
       /*  a.create(1, "Libro1", "test"); // Alice will get an id 1
         a.create(2, "Libro2", "test1"); // Bob will get an id 2
         a.create(3, "Libro3", "test3"); // Charlie will get an id 3
