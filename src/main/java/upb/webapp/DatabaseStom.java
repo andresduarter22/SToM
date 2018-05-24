@@ -23,11 +23,9 @@ public class DatabaseStom {
 	 * @param nombre
 	 * @param correo
 	 * @param password
-	 * @param credito
 	 */
-	public void create(int id, String nombre, String correo, String password, double credito ) {
+	public void create( String nombre, String correo, String password ) {
 		// Create an EntityManager
-		System.out.println("Creando Libro : " + nombre+ " id : "+id);
 		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction transaction = null;
 		try {
@@ -35,7 +33,7 @@ public class DatabaseStom {
 			transaction = manager.getTransaction();
 			transaction.begin();
 			// crea objeto
-			Cliente cliente= new Cliente(id,nombre,correo,password,credito);
+			Cliente cliente= new Cliente(nombre,correo,password);
 
 			// guarda libro persistentemente
 			manager.persist(cliente);
@@ -81,8 +79,8 @@ public class DatabaseStom {
     public static void main(String[] args) {
         DatabaseStom a = new DatabaseStom();
         // Create two Students
-	//	a.create(19,"Dini","dini.com2 ","patito",20.09);
-		a.delete(19);
+		a.create("PEdrote","@asdas","1234");
+//		a.delete(19);
       /*  a.create(1, "Libro1", "test"); // Alice will get an id 1
         a.create(2, "Libro2", "test1"); // Bob will get an id 2
         a.create(3, "Libro3", "test3"); // Charlie will get an id 3

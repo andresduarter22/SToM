@@ -17,7 +17,7 @@ public class ClienteWebApp {
     public javax.ws.rs.core.Response createTrackInJSON(Cliente cliente) {
         String result = "Libro Guardado : " + cliente;
         DatabaseStom b = new DatabaseStom();
-        b.create(cliente.getId_cliente(), cliente.getNombre(), cliente.getCorreo(),cliente.getPassword(),cliente.getCredito());
+        b.create( cliente.getNombre(), cliente.getCorreo(),cliente.getPassword());
         return javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "cliente")
 public class Cliente implements Serializable {
     @Id
-    @Column(name = "id_cliente", unique = true)
+    @Column(name = "id_cliente",unique=true, nullable = false)
     private int id_cliente;
 
     @Column(name = "nombre")
@@ -27,12 +27,12 @@ public class Cliente implements Serializable {
 
     public  Cliente(){}
 
-    public Cliente(int id_cliente, String nombre, String correo, String password, double credito) {
-        this.id_cliente = id_cliente;
+    public Cliente(String nombre, String correo, String password) {
+        this.id_cliente=0;
         this.nombre = nombre;
         this.correo = correo;
         this.password = password;
-        this.credito = credito;
+        this.credito = 0.0;
     }
 
     public int getId_cliente() {
