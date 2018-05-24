@@ -82,9 +82,13 @@ public class DatabaseStom {
     public static void main(String[] args) {
         DatabaseStom a = new DatabaseStom();
         // Create two Students
-		//a.create("PEdrote","rggw@asdas.grf","1234");
-        a.modificar(2,"Asdasd","asdas@sdv.vsdf","asdasd");
+//		a.create("pepe","pepe@pepe.com","abc");
+        //a.modificar(2,"Asdasd","asdas@sdv.vsdf","asdasd");
 		//a.delete(19);
+//		Cliente c = auth("pepe@pepe.com","abc");
+//		System.out.println(c.getId_cliente());
+//		Cliente d = auth("juan@pepfeh.com","abcd");
+//		System.out.println(d.getId_cliente());
       /*  a.create(1, "Libro1", "test"); // Alice will get an id 1
         a.create(2, "Libro2", "test1"); // Bob will get an id 2
         a.create(3, "Libro3", "test3"); // Charlie will get an id 3
@@ -125,7 +129,6 @@ public class DatabaseStom {
 				transaction.rollback();
 			}
 			ex.printStackTrace();
-
 		} finally {
 			manager.close();
 		}
@@ -133,12 +136,12 @@ public class DatabaseStom {
 		try{
 			cliente = list.get(0);
 		}catch (Exception e){
-			return null;
+			return new Cliente("error","error","error");
 		}
 		if (cliente.getPassword().equals(password)) {
 			return cliente;
 		} else {
-			return null;
+			return new Cliente("error","error","error");
 		}
 	}
 

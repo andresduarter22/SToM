@@ -62,14 +62,13 @@ public class ClienteWebApp {
                 .build();
 
     }
-    @GET
+    @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response login(Cliente cliente){
         DatabaseStom db = new DatabaseStom();
         Cliente res = db.auth(cliente.getCorreo(), cliente.getPassword());
-        db.closeDataBase();
         return javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
