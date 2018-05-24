@@ -102,4 +102,39 @@ public class DatabaseStom {
         // NEVER FORGET TO CLOSE THE ENTITY_MANAGER_FACTORY
         ENTITY_MANAGER_FACTORY.close();
     }
+	public static boolean auth(String email, String password) {
+		List<Cliente> list = null;
+		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+		EntityTransaction transaction = null;
+
+		try {
+			// Get a transaction
+			transaction = manager.getTransaction();
+			transaction.begin();
+			// Get Libros
+			list = manager.createQuery("SELECT s FROM " + Cliente.class.getName() + " s WHERE correo = \'"
+					+ email + "\'", Cliente.class)
+					.getResultList();
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+
+		} finally {
+			manager.close();
+		}
+		Cliente cliente = null;
+		try{
+			cliente = list.get(0);
+		}catch (Exception e){
+			return false;
+		}
+		if (cliente.getPassword().equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
