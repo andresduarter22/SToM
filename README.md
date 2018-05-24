@@ -1,5 +1,6 @@
 # SToM
-## El repositorio donde se encuentra el front end en angular es:
+## Front end
+Repositorio publico, proyecto de angular.
 ```
 https://github.com/ndfsa/SToM-frontend
 ```
