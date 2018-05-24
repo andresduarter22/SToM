@@ -110,3 +110,14 @@ if (new.correo not like '%@%_.__%') then
 end if;
 end //
 Delimiter ;
+
+drop trigger if exists Validar_Mail_Editar;
+Delimiter //
+Create trigger Validar_Mail_Editar before update on cliente
+for each row
+Begin
+if (new.correo not like '%_@%_.__%') then
+  set new.correo=null;
+end if;
+end //
+Delimiter ;
