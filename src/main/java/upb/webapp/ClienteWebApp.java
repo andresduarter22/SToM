@@ -35,7 +35,7 @@ public class ClienteWebApp {
     public javax.ws.rs.core.Response borrarCliente(@PathParam("id_cliente") int id_cliente) {
         DatabaseStom b = new DatabaseStom();
         b.delete(id_cliente);
-        return javax.ws.rs.core.Response
+        return  javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
