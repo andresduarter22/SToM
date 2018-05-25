@@ -48,9 +48,9 @@ public class ClienteWebApp {
 
     @PUT
     @Path("/PUT/{id}")
-    public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, String nombre, String correo, String password) {
+    public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, Cliente cliente) {
         DatabaseStom b = new DatabaseStom();
-        b.modificar(id, nombre, correo, password);
+        b.modificar(id, cliente);
         return javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
