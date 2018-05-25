@@ -145,7 +145,7 @@ public class DatabaseStom {
 		}
 	}
 
-	public void modificar(int id, String nombre, String correo, String password) {
+	public void modificar(int id, Cliente cliente) {
 		// Create an EntityManager
 
 		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -155,9 +155,9 @@ public class DatabaseStom {
 			transaction = manager.getTransaction();
 			transaction.begin();
 			Cliente stu = manager.find(Cliente.class, id);
-			stu.setNombre(nombre);
-			stu.setCorreo(correo);
-			stu.setPassword(password);
+			stu.setNombre(cliente.getNombre());
+			stu.setCorreo(cliente.getCorreo());
+			stu.setPassword(cliente.getPassword());
 			manager.persist(stu);
 
 			// envia transaccion
