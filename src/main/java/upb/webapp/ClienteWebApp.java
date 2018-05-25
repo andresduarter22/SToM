@@ -2,7 +2,6 @@ package upb.webapp;
 
 
 import upb.entity.Cliente;
-import upb.entity.Libro;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
