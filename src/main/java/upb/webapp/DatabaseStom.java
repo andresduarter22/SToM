@@ -1,7 +1,6 @@
 package upb.webapp;
 
 import upb.entity.Cliente;
-import upb.entity.Libro;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
