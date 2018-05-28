@@ -24,5 +24,4 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '5.2.10.Final'
     // mysql driver
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-
 }

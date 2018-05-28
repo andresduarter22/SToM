@@ -46,41 +46,31 @@ public class DatabaseStom {
         EntityTransaction transaction = null;
         final String PASSWORD_NOT_ACCEPTED = "Password must be 8 or more characters, cointain at least " +
                 "one upper case letter, one number and one lower case letter.";
-        if (password != null) {
-            boolean passwordIsSecure = password.matches(".*[A-Z]+.*") && password.matches(".*[a-z]+.*") &&
-                    password.matches(".*[0-9]+.*") && (password.length() >= 8);
-            if (password.matches(".*" + nombre + "+.*") || password.matches(".*" + correo + "+.*")) {
-                System.err.println("Paswrod must contain neither the user name nor the user e-mail.");
-            } else {
-                if (passwordIsSecure) {
-                    try {
-                        // empieza transaccon
-                        transaction = manager.getTransaction();
-                        transaction.begin();
-                        // crea objeto
-                        Cliente cliente = new Cliente(nombre, correo, generateHash(nombre, password));
+        if (passwordIsSecure(nombre, correo, password)) {
+            try {
+                // empieza transaccon
+                transaction = manager.getTransaction();
+                transaction.begin();
+                // crea objeto
+                Cliente cliente = new Cliente(nombre, correo, generateHash(nombre, password));
 
-                        // guarda libro persistentemente
-                        manager.persist(cliente);
-                        // envia transaccion
-                        transaction.commit();
-                    } catch (Exception ex) {
-                        if (transaction != null) {
-                            transaction.rollback();
-                        }
-                        ex.printStackTrace();
-                    } finally {
-                        manager.close();
-                    }
-
-                } else {
-                    System.err.println(PASSWORD_NOT_ACCEPTED);
+                // guarda libro persistentemente
+                manager.persist(cliente);
+                // envia transaccion
+                transaction.commit();
+            } catch (Exception ex) {
+                if (transaction != null) {
+                    transaction.rollback();
                 }
+                ex.printStackTrace();
+            } finally {
+                manager.close();
             }
         } else {
             System.err.println(PASSWORD_NOT_ACCEPTED);
         }
     }
+
 
     /**
      * Eliminar Libro
@@ -237,5 +227,14 @@ public class DatabaseStom {
         }
         return hash;
     }
-
+    private static boolean passwordIsSecure(String nombre, String correo, String password){
+        boolean res = (null != password)
+                && (password.matches(".*[A-Z]+.*")
+                && password.matches(".*[a-z]+.*")
+                && password.matches(".*[0-9]+.*")
+                && (password.length() >= 8)
+                && !password.matches(".*" + nombre + "+.*")
+                && !password.matches(".*" + correo + "+.*"));
+        return res;
+    }
 }
