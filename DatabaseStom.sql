@@ -7,7 +7,7 @@ CREATE TABLE cliente(
     id_cliente INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(500),
     correo VARCHAR(500) UNIQUE NOT NULL,
-    password VARCHAR(20),
+    password VARCHAR(70),
     credito double(8,2),
     PRIMARY KEY(id_cliente)
 );

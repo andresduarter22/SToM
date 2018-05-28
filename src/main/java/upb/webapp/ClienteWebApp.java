@@ -1,21 +1,24 @@
 package upb.webapp;
 
 
+import com.sun.jersey.spi.resource.Singleton;
 import upb.entity.Cliente;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/cliente")
+
 public class ClienteWebApp {
+    private static DatabaseStom db = new DatabaseStom();
     @POST
     @Path("/post")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response createTrackInJSON(Cliente cliente) {
         String result = "Libro Guardado : " + cliente;
-        DatabaseStom b = new DatabaseStom();
-        b.create(cliente.getNombre(), cliente.getCorreo(), cliente.getPassword());
+
+        db.create(cliente.getNombre(), cliente.getCorreo(), cliente.getPassword());
         return javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
@@ -31,8 +34,8 @@ public class ClienteWebApp {
     @DELETE
     @Path("/borrar/{id_cliente}")
     public javax.ws.rs.core.Response borrarCliente(@PathParam("id_cliente") int id_cliente) {
-        DatabaseStom b = new DatabaseStom();
-        b.delete(id_cliente);
+
+        db.delete(id_cliente);
         return  javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
@@ -47,8 +50,8 @@ public class ClienteWebApp {
     @PUT
     @Path("/PUT/{id}")
     public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, Cliente cliente) {
-        DatabaseStom b = new DatabaseStom();
-        b.modificar(id, cliente);
+
+        db.modificar(id, cliente);
         return javax.ws.rs.core.Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
@@ -65,7 +68,6 @@ public class ClienteWebApp {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response login(Cliente cliente){
-        DatabaseStom db = new DatabaseStom();
         Cliente res = db.auth(cliente.getCorreo(), cliente.getPassword());
         return javax.ws.rs.core.Response
                 .status(200)
