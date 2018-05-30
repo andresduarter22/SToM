@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SToM.iml" filepath="$PROJECT_DIR$/.idea/modules/SToM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SToM.iml" filepath="$PROJECT_DIR$/SToM.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SToM_main.iml" filepath="$PROJECT_DIR$/.idea/modules/SToM_main.iml" group="SToM" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SToM_test.iml" filepath="$PROJECT_DIR$/.idea/modules/SToM_test.iml" group="SToM" />
     </modules>
