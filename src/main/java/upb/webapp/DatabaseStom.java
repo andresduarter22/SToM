@@ -84,12 +84,12 @@ public class DatabaseStom {
      *
      * @param id
      */
-    public void delete(int id) {
+    public int delete(int id) {
         // Create an EntityManager
         System.out.println("eliminar Cliente: " + id);
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
-
+        boolean flag = true;
         try {
             transaction = manager.getTransaction();
             transaction.begin();
@@ -104,16 +104,21 @@ public class DatabaseStom {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            flag = false;
         } finally {
             manager.close();
+            if(flag){
+                return id;
+            }else{
+                return 0;
+            }
         }
     }
 
 
     public static void main(String[] args) {
-      DatabaseStom a = new DatabaseStom();
+//      DatabaseStom a = new DatabaseStom();
 //      Create two Students
-      a.create("pepe", "pepe@pepe.com", "HuevosconAceite1");
 //      a.modificar(2, "Asdasd", "asdas@sdv.vsdf", "asdasd");
 //      a.delete(19);
 //      for (int i = 0; i < 7; i++) {
@@ -192,7 +197,7 @@ public class DatabaseStom {
         }
     }
 
-    public void modificar(int id, Cliente cliente) {
+    public int modificar(int id, Cliente cliente) {
         // Create an EntityManager
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
@@ -216,6 +221,11 @@ public class DatabaseStom {
             flag = false;
         } finally {
             manager.close();
+            if(flag){
+                return id;
+            }else{
+                return 0;
+            }
         }
     }
     private static String generateHash(String name, String password){
@@ -226,9 +236,9 @@ public class DatabaseStom {
             byte[] bytes = md.digest(name.getBytes(StandardCharsets.UTF_8));
             StringBuilder str = new StringBuilder();
             for(int i=0; i< bytes.length ;i++){
-                str.append(Integer.toString((bytes[i] & 0xff),16));
+                str.append(Integer.toString((bytes[i] & 0xff) + 0x100,16).substring(1));
             }
-            hash = hash + str.toString();
+            hash = str.toString();
         }catch (Exception e){
             System.err.println("aaaaaaaaaaaaaah!");
         }

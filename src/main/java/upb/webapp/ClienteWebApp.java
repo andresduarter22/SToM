@@ -27,15 +27,10 @@ public class ClienteWebApp {
     @DELETE
     @Path("/borrar/{id_cliente}")
     public javax.ws.rs.core.Response borrarCliente(@PathParam("id_cliente") int id_cliente) {
-
-        db.delete(id_cliente);
+        int res = db.delete(id_cliente);
         return  javax.ws.rs.core.Response
                 .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                .header("Access-Control-Max-Age", "1209600")
+                .entity(new Integer(res))
                 .build();
 
     }
@@ -44,15 +39,10 @@ public class ClienteWebApp {
     @Path("/PUT/{id}")
     public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, Cliente cliente) {
 
-        db.modificar(id, cliente);
+        int res = db.modificar(id, cliente);
         return javax.ws.rs.core.Response
                 .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                .header("Access-Control-Max-Age", "1209600")
-
+                .entity(new Integer(res))
                 .build();
 
     }
