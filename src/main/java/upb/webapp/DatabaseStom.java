@@ -47,13 +47,13 @@ public class DatabaseStom {
         final String PASSWORD_NOT_ACCEPTED = "Password must be 8 or more characters, cointain at least " +
                 "one upper case letter, one number and one lower case letter.";
         boolean flag = true;
-        if (passwordIsSecure(nombre, correo, password)) {
+        if (Seguridad.passwordIsSecure(nombre, correo, password)) {
             try {
                 // empieza transaccon
                 transaction = manager.getTransaction();
                 transaction.begin();
                 // crea objeto
-                Cliente cliente = new Cliente(nombre, correo, generateHash(nombre, password));
+                Cliente cliente = new Cliente(nombre, correo, Seguridad.generateHash(nombre, password));
 
                 // guarda libro persistentemente
                 manager.persist(cliente);
@@ -175,7 +175,7 @@ public class DatabaseStom {
                 }
             }
             //verify password
-            if (cliente.getPassword().equals(generateHash(cliente.getNombre(), password))) {
+            if (cliente.getPassword().equals(Seguridad.generateHash(cliente.getNombre(), password))) {
                 failedLoginAttempts.remove(idCliente);
                 return cliente;
             } else {
@@ -202,56 +202,35 @@ public class DatabaseStom {
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         boolean flag = true;
-        try {
-            transaction = manager.getTransaction();
-            transaction.begin();
-            Cliente stu = manager.find(Cliente.class, id);
-            stu.setNombre(cliente.getNombre());
-            stu.setCorreo(cliente.getCorreo());
-            stu.setPassword(generateHash(cliente.getNombre(),cliente.getPassword()));
-            manager.persist(stu);
+        if(Seguridad.passwordIsSecure(cliente.getNombre(),cliente.getCorreo(),cliente.getPassword())){
+            try {
+                transaction = manager.getTransaction();
+                transaction.begin();
+                Cliente stu = manager.find(Cliente.class, id);
+                stu.setNombre(cliente.getNombre());
+                stu.setCorreo(cliente.getCorreo());
+                stu.setPassword(Seguridad.generateHash(cliente.getNombre(),cliente.getPassword()));
+                manager.persist(stu);
 
-            // envia transaccion
-            transaction.commit();
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
+                // envia transaccion
+                transaction.commit();
+            } catch (Exception ex) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                ex.printStackTrace();
+                flag = false;
+            } finally {
+                manager.close();
+                if(flag){
+                    return id;
+                }else{
+                    return 0;
+                }
             }
-            ex.printStackTrace();
-            flag = false;
-        } finally {
-            manager.close();
-            if(flag){
-                return id;
-            }else{
-                return 0;
-            }
+        }else{
+            return 0;
         }
     }
-    private static String generateHash(String name, String password){
-        String hash = "";
-        try{
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(password.getBytes(StandardCharsets.UTF_8));
-            byte[] bytes = md.digest(name.getBytes(StandardCharsets.UTF_8));
-            StringBuilder str = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++){
-                str.append(Integer.toString((bytes[i] & 0xff) + 0x100,16).substring(1));
-            }
-            hash = str.toString();
-        }catch (Exception e){
-            System.err.println("aaaaaaaaaaaaaah!");
-        }
-        return hash;
-    }
-    private static boolean passwordIsSecure(String nombre, String correo, String password){
-        boolean res = (null != password)
-                && (password.matches(".*[A-Z]+.*")
-                && password.matches(".*[a-z]+.*")
-                && password.matches(".*[0-9]+.*")
-                && (password.length() >= 8)
-                && !password.matches(".*" + nombre + "+.*")
-                && !password.matches(".*" + correo + "+.*"));
-        return res;
-    }
+
 }
