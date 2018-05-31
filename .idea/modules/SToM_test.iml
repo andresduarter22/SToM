@@ -9,7 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="SToM_main" />
     <orderEntry type="library" name="Gradle: com.sun.jersey:jersey-json:1.8" level="project" />
     <orderEntry type="library" name="Gradle: com.sun.jersey:jersey-server:1.8" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:0.9.26" level="project" />
