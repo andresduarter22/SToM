@@ -22,7 +22,7 @@ public class DatabaseDistribuidor {
         ENTITY_MANAGER_FACTORY.close();
     }
 
-    public int delete(int id) {
+    public static int delete(int id) {
         // Create an EntityManager
         System.out.println("eliminar Distribuidor: " + id);
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -52,8 +52,9 @@ public class DatabaseDistribuidor {
             }
         }
     }
-
-
-
+    public static void main(String[] args){
+        delete(2);
+        ENTITY_MANAGER_FACTORY.close();
+    }
 
 }

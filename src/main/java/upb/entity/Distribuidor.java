@@ -25,7 +25,7 @@ public class Distribuidor implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-
+    public Distribuidor(){}
     public Distribuidor(String correo, int telefono, String direccion, String nombre) {
         this.correo = correo;
         this.telefono = telefono;
