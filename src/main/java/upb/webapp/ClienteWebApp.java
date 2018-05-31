@@ -16,12 +16,10 @@ public class ClienteWebApp {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response createTrackInJSON(Cliente cliente) {
-        String result = "Libro Guardado : " + cliente;
-
-        db.create(cliente.getNombre(), cliente.getCorreo(), cliente.getPassword());
+        Cliente res = db.create(cliente.getNombre(), cliente.getCorreo(), cliente.getPassword());
         return javax.ws.rs.core.Response
                 .status(200)
-                .entity(cliente)
+                .entity(res)
                 .build();
     }
 

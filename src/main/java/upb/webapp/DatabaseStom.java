@@ -40,12 +40,13 @@ public class DatabaseStom {
      * @param correo
      * @param password
      */
-    public void create(String nombre, String correo, String password) {
+    public Cliente create(String nombre, String correo, String password) {
         // Create an EntityManager
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         final String PASSWORD_NOT_ACCEPTED = "Password must be 8 or more characters, cointain at least " +
                 "one upper case letter, one number and one lower case letter.";
+        boolean flag = true;
         if (passwordIsSecure(nombre, correo, password)) {
             try {
                 // empieza transaccon
@@ -63,11 +64,17 @@ public class DatabaseStom {
                     transaction.rollback();
                 }
                 ex.printStackTrace();
+                flag = false;
             } finally {
                 manager.close();
+                if (flag){
+                    return auth(correo,password);
+                }else{
+                    return new Cliente("No se pudo crear el cliente","error","error");
+                }
             }
         } else {
-            System.err.println(PASSWORD_NOT_ACCEPTED);
+            return new Cliente(PASSWORD_NOT_ACCEPTED,"error","error");
         }
     }
 
@@ -187,17 +194,16 @@ public class DatabaseStom {
 
     public void modificar(int id, Cliente cliente) {
         // Create an EntityManager
-
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
-
+        boolean flag = true;
         try {
             transaction = manager.getTransaction();
             transaction.begin();
             Cliente stu = manager.find(Cliente.class, id);
             stu.setNombre(cliente.getNombre());
             stu.setCorreo(cliente.getCorreo());
-            stu.setPassword(cliente.getPassword());
+            stu.setPassword(generateHash(cliente.getNombre(),cliente.getPassword()));
             manager.persist(stu);
 
             // envia transaccion
@@ -207,6 +213,7 @@ public class DatabaseStom {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            flag = false;
         } finally {
             manager.close();
         }
