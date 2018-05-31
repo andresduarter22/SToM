@@ -24,7 +24,7 @@ public class DatabaseStom {
     private static ConcurrentHashMap<Integer, Queue<Long>> failedLoginAttempts = new ConcurrentHashMap<>();
 
     private static final int ATTEMPTS_TO_LOCKDOWN = 5;
-    private static final int TIME_FRAME = 300000;
+    private static final int TIME_FRAME = 3000;
 
     public DatabaseStom() {
     }
@@ -104,9 +104,9 @@ public class DatabaseStom {
 
 
     public static void main(String[] args) {
-//      DatabaseStom a = new DatabaseStom();
+      DatabaseStom a = new DatabaseStom();
 //      Create two Students
-//      a.create("pepe", "pepe@pepe.com", "HuevosconAceite1");
+      a.create("pepe", "pepe@pepe.com", "HuevosconAceite1");
 //      a.modificar(2, "Asdasd", "asdas@sdv.vsdf", "asdasd");
 //      a.delete(19);
 //      for (int i = 0; i < 7; i++) {
