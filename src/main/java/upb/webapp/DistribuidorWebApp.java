@@ -1,6 +1,10 @@
 package upb.webapp;
 
+import upb.entity.Cliente;
+import upb.entity.Distribuidor;
+
 import javax.ws.rs.DELETE;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -18,6 +22,18 @@ public class DistribuidorWebApp {
                 .entity(new Integer(res))
                 .build();
     }
+
+    @PUT
+    @Path("/PUT/{id}")
+    public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, Distribuidor distribuidor) {
+        int res = db.modificar(id, distribuidor);
+        return javax.ws.rs.core.Response
+                .status(200)
+                .entity(new Integer(res))
+                .build();
+
+    }
+
 
 
 }

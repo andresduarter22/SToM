@@ -37,9 +37,14 @@ public class Distribuidor implements Serializable {
         return id_distribuidor;
     }
 
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getCorreo() {
 
         return correo;
+
     }
 
     public int getTelefono() {

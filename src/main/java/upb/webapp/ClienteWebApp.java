@@ -38,7 +38,6 @@ public class ClienteWebApp {
     @PUT
     @Path("/PUT/{id}")
     public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, Cliente cliente) {
-
         int res = db.modificar(id, cliente);
         return javax.ws.rs.core.Response
                 .status(200)
@@ -46,6 +45,7 @@ public class ClienteWebApp {
                 .build();
 
     }
+
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
