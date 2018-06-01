@@ -3,14 +3,24 @@ package upb.webapp;
 import upb.entity.Cliente;
 import upb.entity.Distribuidor;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("/distribuidor")
 public class DistribuidorWebApp {
     private static DatabaseDistribuidor db = new DatabaseDistribuidor();
+
+    @POST
+    @Path("/post")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public javax.ws.rs.core.Response createTrackInJSON(Distribuidor Distribuidor) {
+        Distribuidor res = db.create(Distribuidor.getNombre(), Distribuidor.getCorreo(), Distribuidor.getTelefono(), Distribuidor.getDireccion());
+        return javax.ws.rs.core.Response
+                .status(200)
+                .entity(res)
+                .build();
+    }
 
     @DELETE
     @Path("/borrar/{id_distribuidor}")

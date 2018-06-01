@@ -88,7 +88,35 @@ public class DatabaseDistribuidor {
 
     }
 
+    public static Distribuidor create(String nombre, String correo, int telefono, String direccion){
+        // Create an EntityManager
+        System.out.println("Crear Distribuidor: " );
+        EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        boolean flag = true;
+        Distribuidor distribuidornuevo=null;
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
 
+            distribuidornuevo = new Distribuidor(correo,telefono,direccion,nombre);
+            if (distribuidornuevo != null) {
+                manager.persist(distribuidornuevo);
+                transaction.commit();
+            }
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+            flag = false;
+        } finally {
+            manager.close();
+
+
+            return distribuidornuevo;
+        }
+    }
 
     public static void main(String[] args){
         delete(2);
