@@ -31,4 +31,13 @@ public class Seguridad {
                 && !password.matches(".*" + correo + "+.*"));
         return res;
     }
+
+    protected static boolean infoCorrect(String correo,String telefono){
+        boolean rees= (correo!= null)
+                && (telefono!= null)
+                && (telefono.length() <= 11 && telefono.length() >= 7)
+                && (correo.matches(".*"+"@gmail.com")|| correo.matches(".*"+"@hotmail.com")
+                        ||correo.matches(".*"+"@outlook.com") );
+        return rees;
+    }
 }

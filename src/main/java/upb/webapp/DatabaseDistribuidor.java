@@ -88,13 +88,14 @@ public class DatabaseDistribuidor {
 
     }
 
-    public static Distribuidor create(String nombre, String correo, int telefono, String direccion){
+    public static Distribuidor create(String nombre, String correo, String telefono, String direccion){
         // Create an EntityManager
         System.out.println("Crear Distribuidor: " );
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         boolean flag = true;
         Distribuidor distribuidornuevo=null;
+        if(Seguridad.infoCorrect(correo,telefono)){
         try {
             transaction = manager.getTransaction();
             transaction.begin();
@@ -116,6 +117,10 @@ public class DatabaseDistribuidor {
 
             return distribuidornuevo;
         }
+        }else{
+            return new Distribuidor("error","error","error", "Correo o telefono invalidos");
+        }
+
     }
 
     public static void main(String[] args){

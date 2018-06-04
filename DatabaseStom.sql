@@ -31,7 +31,7 @@ CREATE TABLE juego(
     nombre VARCHAR(100),
     estado VARCHAR(10),
     categoria VARCHAR(100),
-    costo INT,
+    costo DOUBLE (8,2),
     version VARCHAR(10),
     PRIMARY KEY(id_juego),
     FOREIGN KEY (id_distribuidor) REFERENCES distribuidor(id_distribuidor)

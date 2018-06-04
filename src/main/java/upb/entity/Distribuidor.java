@@ -17,7 +17,7 @@ public class Distribuidor implements Serializable {
     private String correo;
 
     @Column(name = "telefono")
-    private int telefono;
+    private String telefono;
 
     @Column(name = "direccion")
     private String direccion;
@@ -26,7 +26,7 @@ public class Distribuidor implements Serializable {
     private String nombre;
 
     public Distribuidor(){}
-    public Distribuidor(String correo, int telefono, String direccion, String nombre) {
+    public Distribuidor(String correo, String telefono, String direccion, String nombre) {
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
@@ -47,11 +47,11 @@ public class Distribuidor implements Serializable {
 
     }
 
-    public int getTelefono() {
+    public String  getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
