@@ -24,7 +24,7 @@ public class DatabaseStom {
     private static ConcurrentHashMap<Integer, Queue<Long>> failedLoginAttempts = new ConcurrentHashMap<>();
 
     private static final int ATTEMPTS_TO_LOCKDOWN = 5;
-    private static final int TIME_FRAME = 3000;
+    private static final int TIME_FRAME = 300000;
 
     public DatabaseStom() {
     }
