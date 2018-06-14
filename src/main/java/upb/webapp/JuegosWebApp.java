@@ -28,7 +28,7 @@ public class JuegosWebApp {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response createTrackInJSONCompra(Compra compra) {
-        Compra res = db.crearCompra(compra.getId_juego(),compra.getId_cliente(),compra.getPrecio());
+        Compra res = db.crearCompra(compra.getId_juego(),compra.getId_cliente());
         return javax.ws.rs.core.Response
                 .status(200)
                 .entity(res)

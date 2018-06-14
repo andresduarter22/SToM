@@ -52,9 +52,10 @@ CREATE TABLE resena(
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
 
+drop table compra;
 CREATE TABLE compra(
     id_compra INT NOT NULL AUTO_INCREMENT,
-    id_juego INT UNIQUE,
+    id_juego INT,
     id_cliente INT,
     precio int,
     PRIMARY KEY(id_compra),

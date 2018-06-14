@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class DatabaseJuego {
     // Create an EntityManagerFactory when you start the application.
@@ -48,11 +49,15 @@ public class DatabaseJuego {
         }
         return juego;
     }
-    public static Compra crearCompra(int id_juego,int id_cliente, int precio){
-
+    public static Compra crearCompra(int id_juego,int id_cliente){
+        List<Juegos> list = null;
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
-        Compra compra= new Compra(id_juego,id_cliente,precio);
+        list = manager.createQuery("SELECT s FROM " + Juegos.class.getName() + " s WHERE id_juego = \'"
+                + id_juego + "\'", Juegos.class)
+                .getResultList();
+        Compra compra= new Compra(id_juego,id_cliente,list.get(0).getCosto());
+
         try {
             // empieza transaccon
             transaction = manager.getTransaction();
@@ -80,7 +85,7 @@ public class DatabaseJuego {
     //    createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
     //            "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
     //           "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
-        crearCompra(4,1,50);
+        crearCompra(4,5);
         ENTITY_MANAGER_FACTORY.close();
     }
 }
