@@ -18,6 +18,16 @@ public class Juegos implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
+
+
+    @Column(name = "linkimagen")
+    private String linkImagen;
+
+
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
     @Column(name = "estado")
     private String estado;
 
@@ -32,7 +42,7 @@ public class Juegos implements Serializable {
 
     public  Juegos(){}
 
-    public Juegos(String nombre, String estado, String categoria,int costo, String version, int id_distribuidor) {
+    public Juegos(String nombre, String estado, String categoria,int costo, String version, int id_distribuidor,String descripcion,String linkimagen) {
         this.id_juego=0;
         this.id_distribuidor=id_distribuidor;
         this.nombre = nombre;
@@ -40,6 +50,8 @@ public class Juegos implements Serializable {
         this.categoria = categoria;
         this.costo = costo;
         this.version = version;
+        this.descripcion=descripcion;
+        this.linkImagen=linkimagen;
     }
 
     public int getId_juego() {
@@ -65,6 +77,8 @@ public class Juegos implements Serializable {
         return costo;
     }
     public String getVersion(){return version;}
+    public String getLinkImagen() { return linkImagen;}
+    public String getDescripcion() { return descripcion; }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -85,5 +99,15 @@ public class Juegos implements Serializable {
 
     public void setId_distribuidor(int id_distribuidor) {
         this.id_distribuidor = id_distribuidor;
+    }
+
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+
+    public void setLinkImagen(String linkImagen) {
+        this.linkImagen = linkImagen;
     }
 }

@@ -11,6 +11,7 @@
 		<class>upb.entity.Distribuidor</class>
 		<class>upb.entity.Cliente</class>
 		<class>upb.entity.Juegos</class>
+		<class>upb.entity.Compra</class>
 
 		<properties>
 

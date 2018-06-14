@@ -25,11 +25,15 @@ CREATE TABLE distribuidor(
     nombre VARCHAR(200),
     PRIMARY KEY (id_distribuidor)
 );
+
+drop table juego;
 CREATE TABLE juego(
     id_juego INT NOT NULL AUTO_INCREMENT,
     id_distribuidor INT,
     nombre VARCHAR(100),
     estado VARCHAR(10),
+    descripcion text,
+    linkimagen text,
     categoria VARCHAR(100),
     costo DOUBLE (8,2),
     version VARCHAR(10),
@@ -48,19 +52,12 @@ CREATE TABLE resena(
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
 
-CREATE TABLE wishlist(
-    id_wishlist INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE compra(
+    id_compra INT NOT NULL AUTO_INCREMENT,
     id_juego INT UNIQUE,
     id_cliente INT,
-    PRIMARY KEY(id_wishlist),
-    FOREIGN KEY (id_juego) REFERENCES juego(id_juego),
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-);
-CREATE TABLE cart(
-    id_cart INT NOT NULL AUTO_INCREMENT,
-    id_juego INT,
-    id_cliente INT,
-    PRIMARY KEY(id_cart),
+    precio int,
+    PRIMARY KEY(id_compra),
     FOREIGN KEY (id_juego) REFERENCES juego(id_juego),
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );

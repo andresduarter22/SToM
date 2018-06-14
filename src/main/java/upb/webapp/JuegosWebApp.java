@@ -1,6 +1,8 @@
 package upb.webapp;
 
+
 import upb.entity.Juegos;
+import upb.entity.Compra;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,7 +17,18 @@ public class JuegosWebApp {
     @Produces(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response createTrackInJSON(Juegos juego) {
         Juegos res = db.createJuego(juego.getNombre(),juego.getEstado(),juego.getCategoria()
-                ,juego.getCosto(),juego.getVersion(),juego.getId_distribuidor());
+                ,juego.getCosto(),juego.getVersion(),juego.getId_distribuidor(),juego.getDescripcion(),juego.getLinkImagen());
+        return javax.ws.rs.core.Response
+                .status(200)
+                .entity(res)
+                .build();
+    }
+    @POST
+    @Path("/postCompra")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public javax.ws.rs.core.Response createTrackInJSONCompra(Compra compra) {
+        Compra res = db.crearCompra(compra.getId_juego(),compra.getId_cliente(),compra.getPrecio());
         return javax.ws.rs.core.Response
                 .status(200)
                 .entity(res)
