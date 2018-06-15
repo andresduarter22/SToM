@@ -52,12 +52,11 @@ CREATE TABLE resena(
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
 
-drop table compra;
 CREATE TABLE compra(
     id_compra INT NOT NULL AUTO_INCREMENT,
     id_juego INT,
     id_cliente INT,
-    precio int,
+    precio double(8,2) NOT NULL,
     PRIMARY KEY(id_compra),
     FOREIGN KEY (id_juego) REFERENCES juego(id_juego),
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
@@ -103,7 +102,7 @@ Delimiter //
 Create trigger ValidarMail before insert on cliente
 for each row
 Begin
-if (new.correo not like '%@%_.__%') then
+if (new.correo not like '%@%_._%') then
   set new.correo=null;
 end if;
 end //
@@ -114,8 +113,59 @@ Delimiter //
 Create trigger Validar_Mail_Editar before update on cliente
 for each row
 Begin
-if (new.correo not like '%_@%_.__%') then
+if (new.correo not like '%_@%_._%') then
   set new.correo=null;
 end if;
 end //
 Delimiter ;
+
+
+
+drop trigger if exists Un_Juego;
+delimiter //
+Create trigger Un_Juego before insert on compra
+for each row
+BEGIN
+if ((select count(*) from compra where id_juego = new.id_juego and id_cliente = new.id_cliente) > 0) then
+  set new.precio=null;
+end if;
+end //
+Delimiter ;
+
+
+
+drop trigger if exists Credito_Disponible;
+delimiter //
+create trigger Credito_Disponible before insert on compra
+for each row
+BEGIN
+set @credito_disponible = (select credito from cliente where id_cliente = new.id_cliente);
+if ((@credito_disponible-new.precio) < 0) then
+  set new.precio=null;
+end if;
+end //
+Delimiter ;
+
+drop trigger if exists Actualizar_Saldo_Compra;
+delimiter //
+create trigger Actualizar_Saldo_Compra after insert on compra
+for each row
+BEGIN
+set @credito_disponible = (select credito from cliente where id_cliente = new.id_cliente);
+set @credito = @credito_disponible - new.precio;
+update cliente set credito = @credito where id_cliente = new.id_cliente;
+end //
+Delimiter ;
+
+drop trigger if exists Actualizar_Saldo_Devolucion;
+delimiter //
+create trigger Actualizar_Saldo_Devolucion after delete on compra
+for each row
+BEGIN
+set @credito_disponible = (select credito from cliente where id_cliente = old.id_cliente);
+set @credito = @credito_disponible + old.precio*0.75;
+update cliente set credito = @credito where id_cliente = old.id_cliente;
+end //
+Delimiter ;
+
+
