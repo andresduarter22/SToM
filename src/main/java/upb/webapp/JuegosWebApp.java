@@ -40,13 +40,13 @@ public class JuegosWebApp {
      * metodo post para devolver juego
      */
 
-    @POST
-    @Path("/post/devolucion/{id}")
+    @DELETE
+    @Path("/delete/devolucion/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     //si no funciona usar javax.ws
-    public String deleteJuegofromUser(@PathParam("id") int id) {
-        String res = db.devolverJuego(id);
+    public String deleteJuegofromUser(@PathParam("id") int id_comprar) {
+        String res = db.devolverJuego(id_comprar);
         return res;
     }
 
