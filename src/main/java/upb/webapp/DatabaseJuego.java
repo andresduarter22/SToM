@@ -22,11 +22,12 @@ public class DatabaseJuego {
     }
 
     public static Juegos createJuego(String nombre,
-                              String estado, String categoria, int costo, String version,int distribuidor, String descripcion, String linkImagen) {
+                              String estado, String categoria, int costo, String version,int distribuidor, String descripcion,
+                                     String linkimagen) {
         // Create an EntityManager
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
-        Juegos juego= new Juegos(nombre, estado, categoria,costo,version, distribuidor,descripcion,linkImagen);
+        Juegos juego= new Juegos(nombre, estado, categoria,costo,version, distribuidor,descripcion,linkimagen);
         try {
             // empieza transaccon
             transaction = manager.getTransaction();
@@ -141,13 +142,16 @@ public class DatabaseJuego {
     //    createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
     //            "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
     //           "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
+        createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
+                "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
+               "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
 //        crearCompra(4,5);
         //        createJuego("kaiba adventures","released","hentai",800, "1.23a45r", 1);
 //        DatabaseJuego db = new DatabaseJuego();
-        List<Juegos> a = getLista("craft");
+//        List<Juegos> a = getLista("craft");
 //        createJuego("call of duty", "Released", "fps", 1000, "12s", 1);
-        System.out.println(a.get(0).getNombre());
-        System.out.println(a.get(1).getNombre());
-        ENTITY_MANAGER_FACTORY.close();
-    }
+//        System.out.println(a.get(0).getNombre());
+//        System.out.println(a.get(1).getNombre());
+  ENTITY_MANAGER_FACTORY.close();
+  }
 }

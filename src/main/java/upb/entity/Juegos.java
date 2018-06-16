@@ -21,7 +21,7 @@ public class Juegos implements Serializable {
 
 
     @Column(name = "linkimagen")
-    private String linkImagen;
+    private String linkimagen;
 
 
 
@@ -42,7 +42,8 @@ public class Juegos implements Serializable {
 
     public  Juegos(){}
 
-    public Juegos(String nombre, String estado, String categoria,int costo, String version, int id_distribuidor,String descripcion,String linkimagen) {
+    public Juegos(String nombre, String estado, String categoria,int costo, String version, int id_distribuidor,String descripcion,
+                  String linkimagen) {
         this.id_juego=0;
         this.id_distribuidor=id_distribuidor;
         this.nombre = nombre;
@@ -51,7 +52,7 @@ public class Juegos implements Serializable {
         this.costo = costo;
         this.version = version;
         this.descripcion=descripcion;
-        this.linkImagen=linkimagen;
+        this.linkimagen=linkimagen;
     }
 
     public int getId_juego() {
@@ -77,7 +78,7 @@ public class Juegos implements Serializable {
         return costo;
     }
     public String getVersion(){return version;}
-    public String getLinkImagen() { return linkImagen;}
+    public String getLinkImagen() { return linkimagen;}
     public String getDescripcion() { return descripcion; }
 
     public void setNombre(String nombre) {
@@ -108,6 +109,6 @@ public class Juegos implements Serializable {
 
 
     public void setLinkImagen(String linkImagen) {
-        this.linkImagen = linkImagen;
+        this.linkimagen = linkImagen;
     }
 }

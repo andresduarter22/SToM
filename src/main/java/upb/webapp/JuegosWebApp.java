@@ -61,4 +61,7 @@ public class JuegosWebApp {
                 .entity(res)
                 .build();
     }
+//    public static void main(String[] args){
+//        createTrackInJSON(new Juegos("asdas","asdasdasd","asdasdasd",12,"12a",1,"asdasdas","asdasdas"));
+//    }
 }
