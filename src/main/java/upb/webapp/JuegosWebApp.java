@@ -6,6 +6,7 @@ import upb.entity.Compra;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/juegos")
 public class JuegosWebApp {
@@ -47,5 +48,17 @@ public class JuegosWebApp {
     public String deleteJuegofromUser(@PathParam("id") int id) {
         String res = db.devolverJuego(id);
         return res;
+    }
+
+    @GET
+    @Path("/buscar/{str}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public javax.ws.rs.core.Response busqueda(@PathParam("str") String str){
+        List<Juegos> res= db.getLista(str);
+        return javax.ws.rs.core.Response
+                .status(200)
+                .entity(res)
+                .build();
     }
 }

@@ -3,7 +3,6 @@ package upb.webapp;
 import com.sun.jersey.spi.resource.Singleton;
 import upb.entity.Juegos;
 import upb.entity.Compra;
-import upb.entity.Juegos;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -142,13 +141,13 @@ public class DatabaseJuego {
     //    createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
     //            "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
     //           "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
-        crearCompra(4,5);
+//        crearCompra(4,5);
         //        createJuego("kaiba adventures","released","hentai",800, "1.23a45r", 1);
-   //     List<Juegos> a = getLista("craft");
+//        DatabaseJuego db = new DatabaseJuego();
+        List<Juegos> a = getLista("craft");
 //        createJuego("call of duty", "Released", "fps", 1000, "12s", 1);
-   //     System.out.println(a.get(0).getNombre());
-    //    System.out.println(a.get(1).getNombre());
-
+        System.out.println(a.get(0).getNombre());
+        System.out.println(a.get(1).getNombre());
         ENTITY_MANAGER_FACTORY.close();
     }
 }
