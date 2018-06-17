@@ -54,8 +54,7 @@ public class DatabaseJuego {
         List<Juegos> list = null;
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
-        list = manager.createQuery("SELECT s FROM " + Juegos.class.getName() + " s WHERE id_juego = \'"
-                + id_juego + "\'", Juegos.class)
+        list = manager.createQuery("SELECT s FROM " + Juegos.class.getName() + " s WHERE id_juego = \'" + id_juego + "\'", Juegos.class)
                 .getResultList();
         Compra compra= new Compra(id_juego,id_cliente,list.get(0).getCosto());
 
@@ -63,8 +62,6 @@ public class DatabaseJuego {
             // empieza transaccon
             transaction = manager.getTransaction();
             transaction.begin();
-            // crea objeto
-
             // guarda libro persistentemente
             manager.persist(compra);
             // envia transaccion
@@ -106,17 +103,53 @@ public class DatabaseJuego {
 
     }
 
-  public static void main(String[] args){
-        createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
-                "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
-               "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
-//        crearCompra(4,5);
+    public  static String devolverJuego(int id_compra){
+        // Create an EntityManager
+        System.out.println("Devolver juego: " + id_compra);
+        EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        boolean flag = true;
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            Compra compraborr = manager.find(Compra.class, id_compra);
+            if (compraborr != null) {
+                manager.remove(compraborr);
+                transaction.commit();
+            }
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+            flag = false;
+        } finally {
+            manager.close();
+            if(flag){
+                return "exito";
+            }else{
+                return "failure";
+            }
+        }
+
+    }
+
+    public static void main(String[] args){
+    //    createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
+    //            "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
+    //           "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
+    //    createJuego("kaiba adventures 2","released","hentai",800, "1.23a45r", 1,
+     //           "Est es la historia del grandiosisimo kaiba, maestro del hentai que busca conquistar a la princesa valeria.",
+      //         "http://i0.kym-cdn.com/entries/icons/original/000/025/897/kaiba.jpg");
+      //  crearCompra(1,1);
         //        createJuego("kaiba adventures","released","hentai",800, "1.23a45r", 1);
 //        DatabaseJuego db = new DatabaseJuego();
 //        List<Juegos> a = getLista("craft");
 //        createJuego("call of duty", "Released", "fps", 1000, "12s", 1);
 //        System.out.println(a.get(0).getNombre());
 //        System.out.println(a.get(1).getNombre());
+        devolverJuego(1);
   ENTITY_MANAGER_FACTORY.close();
   }
 }
