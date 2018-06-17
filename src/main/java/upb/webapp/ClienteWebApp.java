@@ -11,6 +11,10 @@ import javax.ws.rs.core.MediaType;
 
 public class ClienteWebApp {
     private static DatabaseStom db = new DatabaseStom();
+
+
+
+
     @POST
     @Path("/post")
     @Consumes(MediaType.APPLICATION_JSON)
