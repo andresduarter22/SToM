@@ -61,6 +61,18 @@ public class JuegosWebApp {
                 .entity(res)
                 .build();
     }
+
+    @GET
+    @Path("/getjuego/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public javax.ws.rs.core.Response busqueda(@PathParam("id") int str){
+        Juegos res= db.getJuego(str);
+        return javax.ws.rs.core.Response
+                .status(200)
+                .entity(res)
+                .build();
+    }
 //    public static void main(String[] args){
 //        createTrackInJSON(new Juegos("asdas","asdasdasd","asdasdasd",12,"12a",1,"asdasdas","asdasdas"));
 //    }
