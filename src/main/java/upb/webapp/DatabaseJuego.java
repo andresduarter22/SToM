@@ -152,4 +152,28 @@ public class DatabaseJuego {
         devolverJuego(1);
   ENTITY_MANAGER_FACTORY.close();
   }
+
+    public Juegos getJuego(int str) {
+        List<Juegos> list = null;
+        EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        //Request client to database
+        try {
+            // Get a transaction
+            transaction = manager.getTransaction();
+            transaction.begin();
+            // Get client list
+            list = manager.createQuery("SELECT j FROM " + Juegos.class.getName() + " j WHERE id_juego = \'"
+                    + str + "\'", Juegos.class).getResultList();
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            manager.close();
+        }
+        return list.get(0);
+    }
 }
