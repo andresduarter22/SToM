@@ -22,6 +22,7 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.10.Final'
     compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
     compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '5.2.10.Final'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.12.0'
     // mysql driver
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
 }
