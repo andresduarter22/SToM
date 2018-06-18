@@ -2,10 +2,7 @@ import browserManager.Browser;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import pages.Distribuidor;
-import pages.DistribuidorCrear;
-import pages.DistribuidorEditar;
-import pages.HomePage;
+import pages.*;
 
 public class Test {
 
@@ -13,6 +10,7 @@ public class Test {
     public static Distribuidor distribuidor;
     public static DistribuidorCrear distribuidorCrear;
     public static DistribuidorEditar distribuidorEditar;
+    public static DistribuidorEliminar distribuidorEliminar;
 
     @BeforeClass
     public static void openBrowser(){
@@ -21,6 +19,7 @@ public class Test {
         distribuidor = new Distribuidor();
         distribuidorCrear = new DistribuidorCrear();
         distribuidorEditar = new DistribuidorEditar();
+        distribuidorEliminar = new DistribuidorEliminar();
     }
 
 
@@ -62,6 +61,21 @@ public class Test {
         Assert.assertTrue("Error al crear distribuidor",
                 distribuidor.crearDistribuidor.isDisplayed());
 
+        Thread.sleep(2000);
+    }
+
+    @org.junit.Test
+    public void eliminarDistribuidor() throws InterruptedException {
+
+        Browser.getCurrentSession().driver.get("http://localhost:4200/home");
+        homePage.buttonSingIn.click();
+        distribuidor.eliminarDistribuidor.click();
+        distribuidorEliminar.textBoxID.set("2");
+        distribuidorEliminar.eliminarDistribuidor.click();
+
+        //Verificaciones
+        Assert.assertTrue("Error al crear distribuidor",
+                distribuidor.crearDistribuidor.isDisplayed());
 
         Thread.sleep(2000);
     }
