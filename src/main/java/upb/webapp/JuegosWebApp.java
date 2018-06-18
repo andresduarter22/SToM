@@ -41,12 +41,12 @@ public class JuegosWebApp {
      */
 
     @DELETE
-    @Path("/delete/devolucion/{id}")
+    @Path("/delete/devolucion/{id_cliente}/{id_juego}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     //si no funciona usar javax.ws
-    public String deleteJuegofromUser(@PathParam("id") int id_comprar) {
-        String res = db.devolverJuego(id_comprar);
+    public String deleteJuegofromUser(@PathParam("id_cliente") int id_cliente, @PathParam("id_juego") int id_juego) {
+        String res = db.devolverJuego(id_cliente, id_juego);
         return res;
     }
 

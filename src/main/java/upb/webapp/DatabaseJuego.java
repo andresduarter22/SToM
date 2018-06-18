@@ -104,17 +104,21 @@ public class DatabaseJuego {
 
     }
 
-    public  static String devolverJuego(int id_compra){
+    public  static String devolverJuego(int id_cliente, int id_juego){
         // Create an EntityManager
-        System.out.println("Devolver juego: " + id_compra);
+//        System.out.println("Devolver juego: " + id_compra);
+        List<Compra> list = null;
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         boolean flag = true;
         try {
             transaction = manager.getTransaction();
             transaction.begin();
+            // Get client list
+            list = manager.createQuery("SELECT j FROM " + Compra.class.getName() + " j WHERE id_cliente = " + id_cliente + " AND id_juego = " + id_juego, Compra.class).getResultList();
 
-            Compra compraborr = manager.find(Compra.class, id_compra);
+            Compra compraborr = manager.find(Compra.class, list.get(0).getId_compra());
+            System.out.println("el juego es este putos "+compraborr.toString());
             if (compraborr != null) {
                 manager.remove(compraborr);
                 transaction.commit();
@@ -149,7 +153,7 @@ public class DatabaseJuego {
 //        createJuego("call of duty", "Released", "fps", 1000, "12s", 1);
 //        System.out.println(a.get(0).getNombre());
 //        System.out.println(a.get(1).getNombre());
-//        devolverJuego(1);
+        devolverJuego(1, 2);
   ENTITY_MANAGER_FACTORY.close();
   }
 
