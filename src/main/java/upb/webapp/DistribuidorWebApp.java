@@ -48,6 +48,7 @@ public class DistribuidorWebApp {
     @Path("/PUT/{id}")
     public javax.ws.rs.core.Response modificarUser(@PathParam("id") int id, Distribuidor distribuidor) {
         int res = db.modificar(id, distribuidor);
+
         return javax.ws.rs.core.Response
                 .status(200)
                 .entity(new Integer(res))

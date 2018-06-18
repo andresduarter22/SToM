@@ -10,6 +10,9 @@ public class Distribuidor {
     public Button eliminarDistribuidor;
 
     public Distribuidor(){
+
+//        crearDistribuidor = new Button(By.xpath("/html/body/app-root/app-distribuidor/div[2]/ul/li[1]/a"));
+
         crearDistribuidor = new Button(By.xpath("/html/body/app-root/app-distribuidor/div/ul/li[1]/a"));
         editarDistribuidor = new Button(By.xpath("/html/body/app-root/app-distribuidor/div/ul/li[3]/a"));
         eliminarDistribuidor = new Button(By.xpath("/html/body/app-root/app-distribuidor/div/ul/li[2]/a"));

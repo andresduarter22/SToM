@@ -15,7 +15,7 @@ public class Chrome implements IBrowser {
     @Override
     public WebDriver create() {
         String PATH_PROJECT=new File(".").getAbsolutePath().replace(".","");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\hp\\Desktop\\upb\\PRIMERO2018\\Proyecto de ing. de Software\\automatizacion\\BasicAutomationExample\\src\\test\\java\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\Luis Fer\\U\\Git\\BasicAutomationExample\\src\\test\\java\\drivers\\chromedriver.exe");
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("credentials_enable_service", false);
 

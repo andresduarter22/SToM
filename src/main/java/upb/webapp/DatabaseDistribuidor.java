@@ -113,8 +113,6 @@ public class DatabaseDistribuidor {
             flag = false;
         } finally {
             manager.close();
-
-
             return distribuidornuevo;
         }
         }else{

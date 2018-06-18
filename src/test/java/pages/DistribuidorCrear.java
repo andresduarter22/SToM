@@ -15,6 +15,7 @@ public class DistribuidorCrear {
     public DistribuidorCrear(){
         textBoxDireccion = new TextBox(By.xpath("/html/body/app-root/app-add-distribuidor/div/div/input[@placeholder=\"direccion\"]"));
         textBoxNombre = new TextBox(By.xpath("/html/body/app-root/app-add-distribuidor/div/div/input[@placeholder=\"nombre\"]"));
+
         textBoxEmail = new TextBox(By.xpath("/html/body/app-root/app-add-distribuidor/div/div/input[@placeholder=\"E-mail\"]"));
         textBoxTelefono = new TextBox(By.xpath("/html/body/app-root/app-add-distribuidor/div/div/input[@placeholder=\"telefono\"]"));
         crearDistribuidor = new Button(By.xpath("/html/body/app-root/app-add-distribuidor/div/div/input[@class=\"btn btn-primary btn-block btn-large\"]"));
